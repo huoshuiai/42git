@@ -1,0 +1,24 @@
+FROM python:3.10-slim
+
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libpq-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+
+
+
+COPY microservices/repo_crawler /app/microservices/repo_crawler
+COPY common /app/common
+#COPY microservices/repo_structure/.env /app/.env
+
+RUN pip install --no-cache-dir -r /app/microservices/repo_crawler/requirements.txt
+
+
+# 設置環境變量，確保 Python 找到 common 模塊
+ENV PYTHONPATH /app
+
+CMD ["python", "-m", "microservices.repo_crawler.main"]

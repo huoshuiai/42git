@@ -1,0 +1,9 @@
+.env*
+__pycache__
+.pytest_cache
+*.pdf
+fastembed_cache
+*/self-demo
+qdrant_storage
+
+42git_server_env

@@ -1,0 +1,25 @@
+FROM python:3.10-slim
+
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libpq-dev \
+    git \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+
+
+
+COPY microservices/repo_llm_conclusion_init /app/microservices/repo_llm_conclusion_init
+COPY common /app/common
+#COPY microservices/repo_structure/.env /app/.env
+
+RUN pip install --no-cache-dir -r /app/microservices/repo_llm_conclusion_init/requirements.txt
+
+
+# 設置環境變量，確保 Python 找到 common 模塊
+ENV PYTHONPATH /app
+
+CMD ["python", "-m", "microservices.repo_llm_conclusion_init.main"]

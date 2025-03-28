@@ -1,0 +1,33 @@
+
+generator client {
+  provider        = "prisma-client-js"
+    
+  //important to support Prisma Query engine in Alpine linux,
+  // otherwise "PrismaClientInitializationError2 [PrismaClientInitializationError]: Query engine binary for current platform "linux-musl" could not be found.
+  binaryTargets = ["native", "linux-musl"]
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("USER_SERVICE_DATABASE_URL")
+}
+
+model User {
+  id             String  @id @default(cuid())
+  email String  @unique
+  name  String?
+  role           String?
+  hashedPassword String?
+  picture        String?
+  github_id      String? @unique
+  google_id      String? @unique
+  session Session[] 
+}
+
+model Session {
+  id        String   @id
+  userId    String
+  expiresAt DateTime
+  user User @relation(fields: [userId], references: [id])
+}

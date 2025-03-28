@@ -1,0 +1,10 @@
+.env
+.env.production
+__pycache__
+.pytest_cache
+*.pdf
+fastembed_cache
+
+qdrant_storage
+
+42git_server_env

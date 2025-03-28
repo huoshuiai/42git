@@ -1,0 +1,35 @@
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+github_url = "https://api.github.com/search/repositories"
+
+GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
+
+
+github_header =  {
+    "Accept": "*/*",
+    "Authorization": f"token {GITHUB_TOKEN}"
+}
+
+GITHUB_MIN_STARS = int(os.getenv('GITHUB_MIN_STARS'))
+
+POSTGRESQL_USERNAME = os.getenv('POSTGRESQL_USERNAME')
+POSTGRESQL_PASSWORK = os.getenv('POSTGRESQL_PASSWORK')
+POSTGRESQL_URL = os.getenv('POSTGRESQL_URL')
+POSTGRESQL_DATABACE_NAME = os.getenv('POSTGRESQL_DATABACE_NAME')
+DATABASE_URL = f"postgresql://{POSTGRESQL_USERNAME}:{POSTGRESQL_PASSWORK}@{POSTGRESQL_URL}/{POSTGRESQL_DATABACE_NAME}"
+DATABASE_URL_ASYNC = f"postgresql+asyncpg://{POSTGRESQL_USERNAME}:{POSTGRESQL_PASSWORK}@{POSTGRESQL_URL}/{POSTGRESQL_DATABACE_NAME}"
+
+QDRANT_URL = os.getenv('QDRANT_URL')
+QDRANT_PORT = int(os.getenv('QDRANT_PORT'))
+QDRANT_COLLECTION = os.getenv('QDRANT_COLLECTION')
+QDRANT_KEY = os.getenv('QDRANT_KEY')
+EMBEDDINGS_MODEL = os.getenv('TEXT_EMBEDDING_MODEL')
+
+KAFKA_SERVER_URL = os.getenv('KAFKA_SERVER_URL')
+
+
+
+DEEPSEEK_API_KEY = os.getenv('DEEPSEEK_API_KEY')
